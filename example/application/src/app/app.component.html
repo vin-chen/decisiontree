@@ -1,0 +1,6 @@
+<h1><span *ngIf="(flowUser$)">Hi, {{ flowUser$ | async }}!</span></h1>
+<h2>{{ dynamic$ | async }}</h2>
+<p>Flow app connected to youtube APIs</p>
+
+<div id="player"></div>
+<div *ngIf="version"> version: {{ version }}</div>
