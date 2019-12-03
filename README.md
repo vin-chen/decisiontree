@@ -12,7 +12,7 @@ Running the application locally is fairly simple. You will need node version 10.
 Hint: if you are using older versions of node and need them, have a look at [Node Version Manager](https://github.com/nvm-sh/nvm/blob/master/README.md). If you use MacOS, you can install it with 
 ```
   brew install nvm
-``` 
+```
 and then to check, install and switch version on nvm
 ```
 nvm list
@@ -81,7 +81,7 @@ Below it is described how to use these events and what role each event plays in 
       "clientSecret": "test-app-client-secret",
       "cloudStorageKeys?": "CloudStorageKey[]"
     }
-     ```
+    ```
    Emitting this event notifies the flow-runtime which is running this application in an iFrame, to provide the context required by this app to function. In response to this event, flow-runtime also raises the same event with context in payload.
   - Subscribe to this event on **application startup** to receive the context provided by flow-runtime. You might use these context values as initial values for your application, after all each application is a building block which builds on a foundation from earlier context and contributes to the context needed by flow apps next in the flow.
     ```json
@@ -179,3 +179,19 @@ Installing Kyma on windows:
 - If while installing kyma, you feel that the command is stuck, ctrl + c in the powershell and it should go to the next command.
 
 P.S. - instructions for setting up the cluster locally are without any guarantee. Please follow the official documentation from Kyma to solve any further issues.
+
+
+
+## Toubleshooting
+
+* **Deployment failed because of docker permission issues**
+
+  If you got following issue on your:
+
+  ```bash
+  okDOCKER-CLEAN-UP==================================
+  WARNING: Error loading config file: /Users/d061665/.docker/config.json: open /Users/d061665/.docker/config.json: permission denied
+  DONE=============================================
+  ```
+
+  Then run following command `sudo chown $USER ~/.docker/config.json` and try it again.
