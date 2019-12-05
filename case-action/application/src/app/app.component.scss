@@ -1,0 +1,58 @@
+
+.rating-list li {
+    float: right;
+    color: #ddd;
+    padding: 10px 5px;
+    transform: scale(4);
+  }
+
+  .rating-list li:hover,
+  .rating-list li:hover ~ li, .rating-list li.selected {
+    color: #ffd700;
+  }
+
+  .rating-list {
+    padding-inline-start: 20px;
+    padding-inline-end : 20px;
+    display: inline-block;
+    list-style: none;
+  }
+
+  .card {
+    /* Add shadows to create the "card" effect */
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+  }
+
+  /* On mouse-over, add a deeper shadow */
+  .card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  }
+
+  .container {
+    padding: 2px 16px;
+    text-align: center;
+  }
+
+  div.center {
+    position: absolute;
+    margin: auto;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 600px;
+    height: 200px;
+  }
+
+  .button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 4px;
+  }
