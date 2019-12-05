@@ -76,9 +76,9 @@ export class AppComponent implements OnInit {
     ctx$.subscribe(
       res => {
         const body = {
-          type: res.initialContext.find(e => 'caseAction.type' === e.name).value,
-          content: res.initialContext.find(e => 'caseAction.content' === e.name).value,
-          case_: res.initialContext.find(e => 'caseAction.id' === e.name).value
+          type: res.initialContext.find(e => 'caseAction_type' === e.name).value,
+          content: res.initialContext.find(e => 'caseAction_content' === e.name).value,
+          case_: res.initialContext.find(e => 'caseAction_id' === e.name).value
         };
         // tslint:disable-next-line:max-line-length
         this.http.post(`https://${res.cloudHost}/api/data/v4/CaseAction?account=${res.account}&company=${res.company}&user=${res.user}&clientIdentifier=COR_SERVICE_CLOUD&dtos=CaseAction.8`, body, {
