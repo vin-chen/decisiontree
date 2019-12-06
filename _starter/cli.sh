@@ -2,13 +2,13 @@
 set -e
 
 # name of your app 
-APP_NAME="flow-app-template"
+APP_NAME="NOT-ALLOWED_NAME"
 
 ################ CONFIG TO DEPLOY TO KYMA ##################
 
 # your username on https://hub.docker.com 
 # will be used to push your app to docker.io/<username>/<app-name>
-REGISTRY_USER_NAME="dominikmeyersap"
+REGISTRY_USER_NAME="_______DOCKERHUB"
 
 # namespace inside kyma to deploy the app to
 KYMA_NAMESPACE="hackathon";
