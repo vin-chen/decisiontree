@@ -1,0 +1,32 @@
+<mat-card class="example-card">
+  <mat-card-header>
+    <mat-card-title>Context Mapper</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-grid-list cols="2" rowHeight="10:1">
+      <mat-grid-tile><h4>Old</h4></mat-grid-tile>
+      <mat-grid-tile><h4>New</h4></mat-grid-tile>
+    </mat-grid-list>
+    <mat-grid-list cols="2" rowHeight="10:1">
+      <div *ngFor="let entry of contextMap">
+        <mat-grid-tile>{{entry.oldName}} [{{entry.oldType}}] {{entry.oldValue}}</mat-grid-tile>
+        <mat-grid-tile><!--{{entry.newName}}[{{entry.newType}}]{{entry.newValue}}-->
+          <mat-form-field class="example-full-width">
+            <input matInput [(ngModel)]="entry.newName"required>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Select an option</mat-label>
+            <mat-select [(value)]="entry.newType">
+              <mat-option>None</mat-option>
+              <mat-option value="string">string</mat-option>
+              <mat-option value="number">number</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <input matInput [(ngModel)]="entry.newValue" required>
+          </mat-form-field>
+        </mat-grid-tile>
+      </div>
+    </mat-grid-list>
+  </mat-card-content>
+</mat-card>
