@@ -93,7 +93,7 @@ export class AppComponent implements OnInit {
             this.shellSdk.emit(SHELL_EVENTS.Version1.FLOWS.ON_CONTINUE, {
               output: [
                 {
-                  name: "youtubeResult",
+                  name: "youtube_result",
                   value: result
                 }
               ]
