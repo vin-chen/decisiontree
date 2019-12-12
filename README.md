@@ -94,7 +94,7 @@ You need to download a new one and replace the existing.
    
    -  Adapt the `APP_NAME` to your app. You can also use the same name as your repository (**It needs to be lowercase and dashes, no other chars.**).
    
-   -  Now you are ready to start the deployment. Use the command `.\cli.sh pipeline` to deploy your application. If you see any compilation errors, fix them and run the command again to deploy.
+   -  Now you are ready to start the deployment. Use the command `./cli.sh pipeline` to deploy your application. If you see any compilation errors, fix them and run the command again to deploy.
    
    -  Once the deployment is successful, you will see an output similar to :
    
