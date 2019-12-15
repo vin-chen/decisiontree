@@ -125,13 +125,12 @@ Check out [fsm-shell](https://www.npmjs.com/package/fsm-shell) npm package for d
 
 Below it is described how to use these events and what role each event plays in a flow-app's life cycle.
 
-1. [V1.REQUIRE_CONTEXT](https://github.com/SAP/fsm-shell#V1REQUIRE_CONTEXT) event
+1. [V1.FLOWS.REQUIRE_CONTEXT](https://github.com/SAP/fsm-shell#v1flowsrequire_context) event
   - Publish to this event on **application startup** with the payload similar to
     ```json
     {
       "clientIdentifier": "test-app-client-identifier",
-      "clientSecret": "test-app-client-secret",
-      "cloudStorageKeys?": "CloudStorageKey[]"
+      "clientSecret": "test-app-client-secret"
     }
     ```
    Emitting this event notifies the flow-runtime which is running this application in an iFrame, to provide the context required by this app to function. In response to this event, flow-runtime also raises the same event with context in payload.
