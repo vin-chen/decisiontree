@@ -3,7 +3,9 @@ import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { SHELL_EVENTS, ShellSdk } from 'fsm-shell';
 import { fromEvent } from 'rxjs';
-import { mergeMap, tap } from 'rxjs/operators';
+import { mergeMap, tap, switchMap } from 'rxjs/operators';
+import { ActivatedRoute, ParamMap } from '@angular/router';
+import { TemplateService } from '../../services/template.service';
 
 declare var parent: Window | undefined;
 declare var process: { env: { [k: string]: string } } | undefined;
@@ -25,19 +27,30 @@ export class DecisionTreeComponent implements OnInit {
   public user: string;
   public show = false;
 
-  constructor(@Inject(PLATFORM_ID) private platformId, private sanitizer: DomSanitizer) {
+  private tree: any;
+
+  constructor(
+    @Inject(PLATFORM_ID) private platformId,
+    private sanitizer: DomSanitizer,
+    private route: ActivatedRoute) {
     this.isBrowser = isPlatformBrowser(platformId);
   }
 
   ngOnInit() {
     if (this.isBrowser) {
-
       // browser side rendering only
       this.connectToFlowRuntime();
     } else {
       // server side rendering only
       this.version = process.env.VERSION;
     }
+    this.route.paramMap.pipe(
+      switchMap((params: ParamMap) => {
+        return TemplateService.getTree(parseInt(params.get('id')));
+      })
+    ).subscribe((res) => {
+      this.tree = res;
+    });
   }
 
   private connectToFlowRuntime() {

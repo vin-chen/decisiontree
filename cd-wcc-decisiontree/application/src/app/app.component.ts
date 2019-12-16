@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import templates from './data/templates.json';
+import { ActivatedRoute, ParamMap } from '@angular/router';
+import { switchMap } from 'rxjs/operators';
+import { TemplateService } from './services/template.service.js';
 
 @Component({
   selector: 'app-root',
@@ -8,9 +11,14 @@ import templates from './data/templates.json';
 })
 
 export class AppComponent implements OnInit {
+
   private templates: Array<any>;
 
-  ngOnInit(): void {
+  public constructor() {
+
+  }
+
+  public ngOnInit(): void {
     this.templates = templates;
   }
 
