@@ -1,1 +1,162 @@
-<p>config works!</p>
+<fd-panel style="margin: 12px 0px 12px 0px;">
+    <fd-panel-header>
+        <fd-panel-head>
+            <h2 fd-panel-title>Config Page</h2>
+            <fd-panel-description>Decision tree flows config</fd-panel-description>
+        </fd-panel-head>
+    </fd-panel-header>
+</fd-panel>
+
+<fd-panel>
+    <fd-panel-header>
+        <fd-panel-head>
+            <h2 fd-panel-title>Existing Trees</h2>
+        </fd-panel-head>
+        <fd-panel-actions>
+            <button fd-button (click)="openCreatModal(preInfoModal)">Create</button>
+        </fd-panel-actions>
+    </fd-panel-header>
+
+    <fd-panel-body>
+        <table fd-table>
+            <thead fd-table-header>
+                <tr fd-table-row>
+                    <th fd-table-cell>Template Id</th>
+                    <th fd-table-cell>Template Name</th>
+                    <th fd-table-cell>Templates Count</th>
+                    <th fd-table-cell>Decisions Count</th>
+                    <th fd-table-cell>Conduct</th>
+                </tr>
+            </thead>
+            <tbody fd-table-body>
+                <tr *ngFor="let temp of templates; let i = index" fd-table-row>
+                    <td fd-table-cell class="fd-has-font-weight-semi"><a href="#">{{temp.id}}</a></td>
+                    <td fd-table-cell>{{temp.name}}</td>
+                    <td fd-table-cell>{{temp.templates.length}}</td>
+                    <td fd-table-cell>{{temp.decisions.length}}</td>
+                    <td fd-table-cell>
+                        <button fd-button [fdType]="'medium'" [options]="'light'" [glyph]="'detail-view'"
+                            (click)="rowDetail($event, i)"></button>
+                        <button fd-button [fdType]="'medium'" [options]="'light'" [glyph]="'download'"
+                            (click)="rowDownload($event, i)"></button>
+                        <button fd-button [fdType]="'medium'" [options]="'light'" [glyph]="'delete'"
+                            (click)="rowDelete($event, i)"></button>
+                    </td>
+
+                </tr>
+            </tbody>
+        </table>
+    </fd-panel-body>
+
+</fd-panel>
+
+<fd-panel *ngIf="isCreatingTree">
+    <fd-panel-header>
+        <fd-panel-head>
+            <h2 fd-panel-title>Create Tree</h2>
+        </fd-panel-head>
+        <fd-panel-actions>
+            <button fd-button (click)="isCreatingTree = false" [options]="'light'" style="margin-right: 12px;">Cancle</button>
+            <button fd-button (click)="isCreatingTree = false" [options]="'emphasized'">Confirm</button>
+        </fd-panel-actions>
+    </fd-panel-header>
+
+    <fd-panel-body>
+        <div fd-form-set>
+            <div fd-form-item style="width: 30%;">
+                <label fd-form-label for="inputName">Tree Name:</label>
+                <input fd-form-control type="text" id="inputName" placeholder="new tree name">
+            </div>
+        </div>
+        <div fd-form-set>
+            <div fd-form-item style="width: 100%;">
+                <label fd-form-label>Templetes:</label>
+                <p *ngFor="let temp of inputTemplateConfig.templates">{{temp.id}} / {{temp.name}}</p>
+            </div>
+        </div>
+        <div fd-form-set>
+            <div fd-form-item style="width: 100%;">
+                <label fd-form-label>Decisions:</label>
+                <p *ngFor="let decision of inputTemplateConfig.decisions">{{decision.id}} / {{decision.text}} / {{decision.pid ? decision.pid : 'null'}} / {{decision.templateId ? decision.templateId : 'null'}}</p>
+            </div>
+        </div>
+    </fd-panel-body>
+
+    <fd-panel>
+        <fd-panel-header>
+            <fd-panel-head>
+                <h3 fd-panel-title>Decisions</h3>
+            </fd-panel-head>
+            <fd-panel-actions>
+                <button fd-button (click)="createDecision()" style="margin-right: 12px;">Create</button>
+            </fd-panel-actions>
+        </fd-panel-header>
+
+        <fd-panel-body>
+            decision panel
+        </fd-panel-body>
+
+    </fd-panel>
+
+    <fd-panel>
+        <fd-panel-header>
+            <fd-panel-head>
+                <h3 fd-panel-title>Templetes</h3>
+            </fd-panel-head>
+            <fd-panel-actions>
+                <button fd-button (click)="createTemplete()()" style="margin-right: 12px;">Create</button>
+            </fd-panel-actions>
+        </fd-panel-header>
+
+        <fd-panel-body>
+            templates panel
+        </fd-panel-body>
+    </fd-panel>
+
+</fd-panel>
+<ng-template let-modal #preInfoModal>
+    <fd-modal-header>
+        <h1 fd-modal-title>Choose the steps to continue</h1>
+        <button fd-modal-close-btn (click)="modal.dismiss('x')"></button>
+    </fd-modal-header>
+    <fd-modal-body style="text-align: center;">
+        <fd-file-input #fdInput style="width: 100%;" (onDragEnter)="uploadState = 'over'"
+            (onDragLeave)="uploadState = 'default'" (onSelect)="selectHandler($event)" [accept]="'.json'">
+            <div class="outer-div">
+                <div class="inner-div" [ngClass]="{'state-over': uploadState === 'over'}">
+                    <div class="content-div" *ngIf="!uploadFiles || uploadFiles.length === 0">
+                        <fd-icon [glyph]="'upload-to-cloud'" [size]="'xl'"></fd-icon>
+                        <span style="margin-top: 10px;">
+                            Drop the .json config file(s) here, or
+                            <a style="cursor: pointer;" (click)="fdInput.open()">
+                                browse
+                            </a>.
+                        </span>
+                    </div>
+                    <div class="content-div" *ngIf="uploadFiles && uploadFiles.length > 0">
+                        <ul fd-list
+                            style="display: block; width: 100%; height: 100%; max-height: 100%; overflow: auto;">
+                            <li fd-list-item *ngFor="let file of uploadFiles; let i = index;">
+                                {{file.name}}
+                                <span style="flex-grow: 1;"></span>
+                                <span class="delete-icon">
+                                    <fd-icon [glyph]="'sys-cancel'" [size]="'l'" (click)="removeFile(i)"></fd-icon>
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </fd-file-input>
+        <button fd-button [options]="'light'" (click)="createTree()">Create new decision config</button>
+    </fd-modal-body>
+    <fd-modal-footer>
+        <button class="action-button" fd-button (click)="modal.dismiss('cancel')" [options]="'light'">
+            Cancel
+        </button>
+        <button *ngIf="uploadFiles && uploadFiles.length > 0" class="action-button" fd-button
+            (click)="modal.close('continue')" [fdType]="'main'">
+            Upload
+        </button>
+    </fd-modal-footer>
+</ng-template>

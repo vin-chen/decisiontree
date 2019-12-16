@@ -6,7 +6,7 @@
     Decision Tree help you to go <b>EASIER</b> and <b>FASTER</b>!
   </fd-shellbar-title>
   <fd-shellbar-actions>
-    <fd-popover placement="left-start">
+    <fd-popover #linkPopover id="linkPopover" placement="left-start">
       <fd-popover-control>
           <fd-icon [glyph]="'menu2'"
                    [size]="'l'"></fd-icon>
@@ -15,10 +15,10 @@
         <fd-menu>
             <ul fd-menu-list>
               <li>
-                <a fd-side-nav-link [routerLink]="['/config']">Config UI</a>
+                <a fd-side-nav-link [routerLink]="['/config']" (click)="linkPopover.close()">Config UI</a>
               </li>
                 <li *ngFor="let template of templates">
-                  <a fd-side-nav-link [routerLink]="['/decision', template.id]">{{template.name}} Decision UI</a>
+                  <a fd-side-nav-link [routerLink]="['/decision', template.id]" (click)="linkPopover.close()">{{template.name}} Decision UI</a>
                 </li>
             </ul>
         </fd-menu>

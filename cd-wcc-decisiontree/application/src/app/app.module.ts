@@ -7,6 +7,7 @@ import { DecisionTreeComponent } from './components/decision-tree/decision-tree.
 import { ConfigComponent } from './components/config/config.component';
 import { NoteComponent } from './note/note.component';
 import { FundamentalNgxModule } from 'fundamental-ngx';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 const routes: Routes = [
   { path: 'config', component:  ConfigComponent},
@@ -27,6 +28,7 @@ const routes: Routes = [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
     RouterModule.forRoot(routes),
     FundamentalNgxModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
