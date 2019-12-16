@@ -1,0 +1,272 @@
+[
+    {
+        "id": 1,
+        "name": "Service call",
+        "templates": [
+            {
+                "id": 11,
+                "name": "device broken",
+                "values": [
+                    {
+                        "key": "servicecall_subject",
+                        "value": "xxx {{name}}",
+                        "type": "string"
+                    },
+                    {
+                        "key": "servicecall_priority",
+                        "value": "{{}}",
+                        "type": "string"
+                    },
+                    {
+                        "key": "servicecall_remarks",
+                        "value": "{{}}",
+                        "type": "string"
+                    }
+                ]
+            },
+            {
+                "id": 12,
+                "name": "device not stable",
+                "values": [
+                    {
+                        "key": "servicecall_subject",
+                        "value": "{{}}",
+                        "type": "string"
+                    },
+                    {
+                        "key": "servicecall_priority",
+                        "value": "{{}}",
+                        "type": "string"
+                    },
+                    {
+                        "key": "servicecall_remarks",
+                        "value": "{{}}",
+                        "type": "string"
+                    }
+                ]
+            },
+            {
+                "id": 13,
+                "name": "customer don't know how to use device",
+                "values": [
+                    {
+                        "key": "servicecall_subject",
+                        "value": "{{}}",
+                        "type": "string"
+                    },
+                    {
+                        "key": "servicecall_priority",
+                        "value": "{{}}",
+                        "type": "string"
+                    },
+                    {
+                        "key": "servicecall_remarks",
+                        "value": "{{}}",
+                        "type": "string"
+                    }
+                ]
+            }
+        ],
+        "decisions": [
+            {
+                "id": 1,
+                "text": "one",
+                "pid": null,
+                "templateId": null
+            },
+            {
+                "id": 2,
+                "text": "one - one",
+                "pid": 1,
+                "templateId": null
+            },
+            {
+                "id": 3,
+                "text": "one - two",
+                "pid": 1,
+                "templateId": null
+            },
+            {
+                "id": 4,
+                "text": "one - three",
+                "pid": 1,
+                "templateId": null
+            },
+            {
+                "id": 5,
+                "text": "one - one - one",
+                "pid": 2,
+                "templateId": 11
+            },
+            {
+                "id": 6,
+                "text": "one - one - two",
+                "pid": 2,
+                "templateId": 12
+            },
+            {
+                "id": 7,
+                "text": "one - one - three",
+                "pid": 2,
+                "templateId": 13
+            },
+            {
+                "id": 8,
+                "text": "one - two - one",
+                "pid": 3,
+                "templateId": 11
+            },
+            {
+                "id": 9,
+                "text": "one - two - two",
+                "pid": 3,
+                "templateId": 12
+            },
+            {
+                "id": 10,
+                "text": "one - two - three",
+                "pid": 3,
+                "templateId": 13
+            },
+            {
+                "id": 11,
+                "text": "one - three - one",
+                "pid": 4,
+                "templateId": 11
+            },
+            {
+                "id": 12,
+                "text": "one - three - two",
+                "pid": 4,
+                "templateId": 12
+            }
+        ]
+        
+    },
+
+
+
+    {
+        "id": 2,
+        "name": "Note",
+        "templates": [
+            {
+                "id": 21,
+                "name": "device broken",
+                "values": [
+                    {
+                        "key": "note_subject",
+                        "value": "{{}}"
+                    },
+                    {
+                        "key": "note_content",
+                        "value": "{{}}"
+                    }
+                ]
+            },
+            {
+                "id": 22,
+                "name": "device not stable",
+                "values": [
+                    {
+                        "key": "note_subject",
+                        "value": "{{}}"
+                    },
+                    {
+                        "key": "note_content",
+                        "value": "{{}}"
+                    }
+                ]
+            },
+            {
+                "id": 23,
+                "name": "help user",
+                "values": [
+                    {
+                        "key": "note_subject",
+                        "value": "{{}}"
+                    },
+                    {
+                        "key": "note_content",
+                        "value": "{{}}"
+                    }
+                ]
+            }
+        ],
+        "decisions": [
+            {
+                "id": 1,
+                "text": "one",
+                "pid": null,
+                "templateId": null
+            },
+            {
+                "id": 2,
+                "text": "one - one",
+                "pid": 1,
+                "templateId": null
+            },
+            {
+                "id": 3,
+                "text": "one - two",
+                "pid": 1,
+                "templateId": null
+            },
+            {
+                "id": 4,
+                "text": "one - three",
+                "pid": 1,
+                "templateId": null
+            },
+            {
+                "id": 5,
+                "text": "one - one - one",
+                "pid": 2,
+                "templateId": 21
+            },
+            {
+                "id": 6,
+                "text": "one - one - two",
+                "pid": 2,
+                "templateId": 22
+            },
+            {
+                "id": 7,
+                "text": "one - one - three",
+                "pid": 2,
+                "templateId": 23
+            },
+            {
+                "id": 8,
+                "text": "one - two - one",
+                "pid": 3,
+                "templateId": 21
+            },
+            {
+                "id": 9,
+                "text": "one - two - two",
+                "pid": 3,
+                "templateId": 22
+            },
+            {
+                "id": 10,
+                "text": "one - two - three",
+                "pid": 3,
+                "templateId": 23
+            },
+            {
+                "id": 11,
+                "text": "one - three - one",
+                "pid": 4,
+                "templateId": 21
+            },
+            {
+                "id": 12,
+                "text": "one - three - two",
+                "pid": 4,
+                "templateId": 22
+            }
+        ]
+        
+    }
+]
