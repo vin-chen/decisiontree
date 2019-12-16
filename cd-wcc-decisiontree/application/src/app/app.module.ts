@@ -3,8 +3,8 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
-import { DecisionTreeComponent } from './decision-tree/decision-tree.component';
-import { ConfigComponent } from './config/config.component';
+import { DecisionTreeComponent } from './components/decision-tree/decision-tree.component';
+import { ConfigComponent } from './components/config/config.component';
 
 const routes: Routes = [
   { path: 'config', component:  ConfigComponent},
