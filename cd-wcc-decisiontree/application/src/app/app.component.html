@@ -1,12 +1,2 @@
-<div class="card center">
-  <div class="container">
-    <h4><b>Hi {{user}}, press any star to continue.</b></h4>
-  </div>
-  <div class=" container">
-    <ul class="list-inline rating-list" *ngFor="let star of stars">
-      <li (click)="countStar(star)" [ngClass]="{'selected': (star <= selectedValue)}">
-        <i class="fa fa-star"></i>
-      </li>
-    </ul>
-  </div>
-</div>
+<p>Welcome!</p>
+<router-outlet></router-outlet>
