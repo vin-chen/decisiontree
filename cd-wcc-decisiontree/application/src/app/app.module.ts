@@ -9,6 +9,7 @@ import { ConfigComponent } from './config/config.component';
 const routes: Routes = [
   { path: 'config', component:  ConfigComponent},
   { path: 'decision', component: DecisionTreeComponent },
+  { path: 'decision/:id', component: DecisionTreeComponent },
 ];
 
 @NgModule({

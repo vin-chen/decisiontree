@@ -141,11 +141,7 @@
                 "templateId": 12
             }
         ]
-        
     },
-
-
-
     {
         "id": 2,
         "name": "Note",
@@ -267,6 +263,5 @@
                 "templateId": 22
             }
         ]
-        
     }
 ]
