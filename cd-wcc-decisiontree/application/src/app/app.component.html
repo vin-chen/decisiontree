@@ -1,14 +1,30 @@
-<h1>Decision Tree help you to go <b>EASIER</b> and <b>FASTER</b>!</h1>
-<nav>
-  <ul>
-    <li><a routerLink="/config" routerLinkActive="active">Config UI</a></li>
-    <li>
-      <ul>
-        <li *ngFor="let template of templates">
-          <a [routerLink]="['/decision', template.id]" routerLinkActive="active">Decision Tree UI -> {{template.name}}</a>
-        </li>
-      </ul>
-    </li>
-  </ul>
-</nav>
+<fd-shellbar>
+  <fd-shellbar-logo>
+    <a href="#" class="fd-shellbar__logo fd-shellbar__logo--image-replaced" aria-label="SAP"></a>
+  </fd-shellbar-logo>
+  <fd-shellbar-title>
+    Decision Tree help you to go <b>EASIER</b> and <b>FASTER</b>!
+  </fd-shellbar-title>
+  <fd-shellbar-actions>
+    <fd-popover placement="left-start">
+      <fd-popover-control>
+          <fd-icon [glyph]="'menu2'"
+                   [size]="'l'"></fd-icon>
+      </fd-popover-control>
+      <fd-popover-body *ngIf="templates && templates.length">
+        <fd-menu>
+            <ul fd-menu-list>
+              <li>
+                <a fd-side-nav-link [routerLink]="['/config']">Config UI</a>
+              </li>
+                <li *ngFor="let template of templates">
+                  <a fd-side-nav-link [routerLink]="['/decision', template.id]">{{template.name}} Decision UI</a>
+                </li>
+            </ul>
+        </fd-menu>
+      </fd-popover-body>
+    </fd-popover>
+  </fd-shellbar-actions>
+</fd-shellbar>
+
 <router-outlet></router-outlet>
