@@ -7,7 +7,6 @@ import { DecisionTreeComponent } from './decision-tree/decision-tree.component';
 import { ConfigComponent } from './config/config.component';
 
 const routes: Routes = [
-  { path: '', component: AppComponent },
   { path: 'config', component:  ConfigComponent},
   { path: 'decision', component: DecisionTreeComponent },
 ];
