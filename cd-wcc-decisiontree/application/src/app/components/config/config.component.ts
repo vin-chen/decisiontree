@@ -59,7 +59,7 @@ export class ConfigComponent implements OnInit {
     this.selectedTemplateConfig = null;
     if (!this.localStorage.templates) {
       this.localStorage.templates = templates;
-    } 
+    }
   }
 
   ngOnInit() {
@@ -106,11 +106,11 @@ export class ConfigComponent implements OnInit {
     // console.log(this.onEditTemplate);
     const temp: ITemplate = { ...this.onEditTemplate };
     this.onEditTemplateConfig.templates.push(temp);
-    this.onEditTemplate = {...this.initialTemplate};
+    this.onEditTemplate = { ...this.initialTemplate };
   }
 
   addTemplateValue() {
-    const temp = {...this.initialTemplateValue}
+    const temp = { ...this.initialTemplateValue }
     this.onEditTemplateValues.push(temp);
   }
 
@@ -119,12 +119,13 @@ export class ConfigComponent implements OnInit {
       this.noNameError = true;
       return;
     } else {
-      this.onEditTemplateConfig.id = this.templates.length;
+      this.onEditTemplateConfig.id = this.templates.length + 1;
       const tempCongig = { ...this.onEditTemplateConfig };
       this.templates.push(tempCongig);
       this.localStorage.templates = this.templates;
-      this.onEditTemplateConfig = {...this.initialTemplateConfig};
+      this.onEditTemplateConfig = { ...this.initialTemplateConfig };
       this.isCreatingTree = false;
+      window.location.reload();
     }
   }
 
@@ -169,7 +170,7 @@ export class ConfigComponent implements OnInit {
   }
 
   public deleteItemFormArray(array: Array<any>, index: number) {
-   array.splice(index, 1);
+    array.splice(index, 1);
   }
 
 }

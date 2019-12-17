@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { DecisionTreeComponent } from './components/decision-tree/decision-tree.component';
 import { ConfigComponent } from './components/config/config.component';
 import { NoteComponent } from './components/note/note.component';
+import { EmailComponent } from './components/email/email.component';
 import { FundamentalNgxModule } from 'fundamental-ngx';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LocalstorageService } from './services/localStorage.service';
@@ -14,7 +15,8 @@ import { TemplateService } from './services/template.service';
 const routes: Routes = [
   { path: 'config', component:  ConfigComponent},
   { path: 'decision/:id', component: DecisionTreeComponent },
-  { path: 'note', component: NoteComponent }
+  { path: 'note', component: NoteComponent },
+  { path: 'email', component: EmailComponent }
 ];
 
 @NgModule({
@@ -22,7 +24,8 @@ const routes: Routes = [
     AppComponent,
     ConfigComponent,
     DecisionTreeComponent,
-    NoteComponent
+    NoteComponent,
+    EmailComponent
   ],
   imports: [
     FormsModule,
