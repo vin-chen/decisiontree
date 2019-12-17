@@ -54,7 +54,7 @@ spec:
           containerPort: 1337
         resources:
           limits:
-            memory: 100Mi
+            memory: 500Mi
           requests:
             memory: 20Mi
         env:

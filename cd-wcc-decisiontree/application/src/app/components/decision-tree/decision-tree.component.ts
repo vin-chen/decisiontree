@@ -96,13 +96,20 @@ export class DecisionTreeComponent implements OnInit {
 
   }
 
+  private replacePlaceHolder(items: Array<any>) {
+    items.forEach((item) => {
+      item.value = item.value.replace(/{{user}}/, this.user);
+    });
+    return items;
+  }
+
   public onMakeDecision(decision: any) {
     this.currentDecision = decision;
     this.decisionDescStack.push(decision.text);
     this.decisionDesc = this.getDescription(false);
     this.decisions = decision.children;
     if (decision && decision.templateId) {
-      this.template = TemplateService.getTemplateData(this.categoryId, decision.templateId);
+      this.template = this.replacePlaceHolder(TemplateService.getTemplateData(this.categoryId, decision.templateId));
     }
     if (!decision.hasChildren) {
       this.decisionDesc = this.getDescription(true);

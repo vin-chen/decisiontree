@@ -16,7 +16,7 @@ export class TemplateService {
         }
         return TemplateService.templates;
     }
-    
+
     public static getTree(id: number): Array<any> {
         const templates = TemplateService.getTemplates();
         const template = templates.find(data => data.id === id);
