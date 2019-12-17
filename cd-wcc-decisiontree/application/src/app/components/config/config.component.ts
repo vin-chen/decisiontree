@@ -91,7 +91,7 @@ export class ConfigComponent implements OnInit {
 
   addDecision() {
     console.log(this.onEditDecision);
-    const temp = this.onEditDecision;
+    const temp: IDecision = this.onEditDecision;
     this.onEditTemplateConfig.decisions.push(temp);
     this.onEditDecision = this.initialDecision;
   }
@@ -142,6 +142,10 @@ export class ConfigComponent implements OnInit {
         break;
       }
     }
+  }
+
+  public downloadFile() {
+    console.log(this.selectedTemplateConfig);
   }
 
 }

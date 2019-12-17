@@ -66,7 +66,9 @@
         <div fd-form-set>
             <div fd-form-item style="width: 30%;">
                 <label fd-form-label for="inputName">Tree Name *:</label>
-                <input fd-form-control type="text" id="inputName" [(ngModel)]="onEditTemplateConfig.name" placeholder="new tree name" [state]="noNameError ? 'invalid' : ''" (ngModelChange)="noNameError = false">
+                <input fd-form-control type="text" id="inputName" [(ngModel)]="onEditTemplateConfig.name"
+                    placeholder="new tree name" [state]="noNameError ? 'invalid' : ''"
+                    (ngModelChange)="noNameError = false">
             </div>
         </div>
         <div fd-form-set>
@@ -76,7 +78,7 @@
                     <p *ngFor="let temp of onEditTemplateConfig.templates">{{temp.id}} / {{temp.name}}</p>
                 </div>
                 <div *ngIf="!onEditTemplateConfig.templates || !onEditTemplateConfig.templates.length">
-                    <p > No templates added
+                    <p> No templates added
                     </p>
                 </div>
             </div>
@@ -86,11 +88,12 @@
                 <label fd-form-label>Decisions:</label>
                 <div *ngIf="onEditTemplateConfig.decisions && onEditTemplateConfig.decisions.length">
                     <p *ngFor="let decision of onEditTemplateConfig.decisions">{{decision.id}} / {{decision.text}} /
-                        {{decision.pid ? decision.pid : 'null'}} / {{decision.templateId ? decision.templateId : 'null'}}
+                        {{decision.pid ? decision.pid : 'null'}} /
+                        {{decision.templateId ? decision.templateId : 'null'}}
                     </p>
                 </div>
                 <div *ngIf="!onEditTemplateConfig.decisions || !onEditTemplateConfig.decisions.length">
-                    <p > No decisions added
+                    <p> No decisions added
                     </p>
                 </div>
             </div>
@@ -243,14 +246,13 @@
         <button fd-modal-close-btn (click)="modal.dismiss('x')"></button>
     </fd-modal-header>
     <fd-modal-body style="text-align: center;">
-    
+
     </fd-modal-body>
     <fd-modal-footer>
         <button class="action-button" fd-button (click)="downloadFile()" [options]="'light'">
             Download
         </button>
-        <button class="action-button" fd-button
-            (click)="modal.close('continue')" [fdType]="'main'">
+        <button class="action-button" fd-button (click)="modal.close('continue')" [fdType]="'main'">
             Confirmed
         </button>
     </fd-modal-footer>
