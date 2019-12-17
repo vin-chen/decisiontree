@@ -8,18 +8,20 @@ import { tap, mergeMap } from 'rxjs/operators';
 declare var parent: Window | undefined;
 declare var process: { env: { [k: string]: string } } | undefined;
 @Component({
-  selector: 'app-note',
-  templateUrl: './note.component.html',
-  styleUrls: ['./note.component.scss']
+  selector: 'app-email',
+  templateUrl: './email.component.html',
+  styleUrls: ['./email.component.scss']
 })
-export class NoteComponent implements OnInit {
+export class EmailComponent implements OnInit {
 
   private shellSdk: ShellSdk;
   private isBrowser: boolean;
   public version: string;
   public user: string;
-  public note = {
-    title: '',
+  public email = {
+    fromAddress: '',
+    toAddress: '',
+    subject: '',
     content: ''
   };
 
@@ -65,7 +67,7 @@ export class NoteComponent implements OnInit {
     ctx$.subscribe(
       res => {
         this.user = res.user;
-        this.note = this.parseNoteObjectFromContext(res.initialContext);
+        this.email = this.parseEmailObjectFromContext(res.initialContext);
       }
     );
 
@@ -82,12 +84,14 @@ export class NoteComponent implements OnInit {
     this.shellSdk.emit(SHELL_EVENTS.Version1.FLOWS.CAN_CONTINUE, true);
   }
 
-  private parseNoteObjectFromContext(initCont: any[]) {
-    let note = {
-      title: this.findValueByKeyFromContextArray(initCont, 'note_title'),
-      content: this.findValueByKeyFromContextArray(initCont, 'note_content')
+  private parseEmailObjectFromContext(initCont: any[]) {
+    let email = {
+      fromAddress: this.findValueByKeyFromContextArray(initCont, 'email_fromAddress'),
+      toAddress: this.findValueByKeyFromContextArray(initCont, 'email_toAddress'),
+      subject: this.findValueByKeyFromContextArray(initCont, 'email_subject'),
+      content: this.findValueByKeyFromContextArray(initCont, 'email_content')
     };
-    return note;
+    return email;
   }
 
   private findValueByKeyFromContextArray(initCont: any[], key: string) {
@@ -99,4 +103,5 @@ export class NoteComponent implements OnInit {
     });
     return value;
   }
+
 }
