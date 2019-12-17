@@ -5,63 +5,84 @@
         "templates": [
             {
                 "id": 11,
-                "name": "device broken",
+                "name": "device broken - under warranty",
                 "values": [
                     {
                         "key": "servicecall_subject",
-                        "value": "xxx {{name}}",
+                        "value": "{{user}} device broken",
                         "type": "string"
                     },
                     {
                         "key": "servicecall_priority",
-                        "value": "{{}}",
+                        "value": "high",
                         "type": "string"
                     },
                     {
                         "key": "servicecall_remarks",
-                        "value": "{{}}",
+                        "value": "customer's device is totally broken, and want to repiare it, and the device is under warranty",
                         "type": "string"
                     }
                 ]
             },
             {
                 "id": 12,
-                "name": "device not stable",
+                "name": "device broken - out of warranty",
                 "values": [
                     {
                         "key": "servicecall_subject",
-                        "value": "{{}}",
+                        "value": "{{user}} device broken",
                         "type": "string"
                     },
                     {
                         "key": "servicecall_priority",
-                        "value": "{{}}",
+                        "value": "mediumn",
                         "type": "string"
                     },
                     {
                         "key": "servicecall_remarks",
-                        "value": "{{}}",
+                        "value": "customer's device is totally broken, and want to repiare it, and the device is out of warranty",
                         "type": "string"
                     }
                 ]
             },
             {
                 "id": 13,
-                "name": "customer don't know how to use device",
+                "name": "device not stable - need repaire",
                 "values": [
                     {
                         "key": "servicecall_subject",
-                        "value": "{{user}} device broker",
+                        "value": "{{user}} want to repaire device",
                         "type": "string"
                     },
                     {
                         "key": "servicecall_priority",
-                        "value": "{{}}",
+                        "value": "medium",
                         "type": "string"
                     },
                     {
                         "key": "servicecall_remarks",
-                        "value": "user report their device is broken, with hight priority, and need us dispatch worker immediately",
+                        "value": "Customer's device is not stable,the customer want to get it reparied immedately",
+                        "type": "string"
+                    }
+                ]
+            },
+            {
+                "id": 14,
+                "name": "device not stable - need replacement",
+                "values": [
+                    {
+                        "key": "servicecall_subject",
+                        "value": "{{user}} want a device",
+                        "type": "string"
+                    },
+                    {
+                        "key": "servicecall_priority",
+                        "value": "medium",
+                        "type": "string"
+                    },
+                    {
+                        "key": "servicecall_remarks",
+                        "value": "Customer's device is not stable, and want to change a new one",
                         "type": "string"
                     }
                 ]
@@ -70,80 +91,80 @@
         "decisions": [
             {
                 "id": 11,
-                "text": "one",
+                "text": "I have device quality problem, and",
+                "pid": null,
+                "templateId": null
+            },
+            {
+                "id": 21,
+                "text": "I don't know how to use my device, and",
+                "pid": null,
+                "templateId": null
+            },
+            {
+                "id": 31,
+                "text": "I want to warranty my deivce, and",
                 "pid": null,
                 "templateId": null
             },
             {
                 "id": 12,
-                "text": "one - one",
+                "text": "my device cannot work totally, and",
                 "pid": 11,
                 "templateId": null
             },
             {
                 "id": 13,
-                "text": "one - two",
-                "pid": 11,
-                "templateId": null
-            },
-            {
-                "id": 14,
-                "text": "one - three",
+                "text": "my device does not work time to time, and",
                 "pid": 11,
                 "templateId": null
             },
             {
                 "id": 15,
-                "text": "one - one - one",
+                "text": "the device is under warranty",
                 "pid": 12,
                 "templateId": 11
             },
             {
                 "id": 16,
-                "text": "one - one - two",
+                "text": "the device is out of warranty",
                 "pid": 12,
                 "templateId": 12
-            },
-            {
-                "id": 17,
-                "text": "one - one - three",
-                "pid": 12,
-                "templateId": 13
             },
             {
                 "id": 18,
-                "text": "one - two - one",
-                "pid": 13,
-                "templateId": 11
-            },
-            {
-                "id": 19,
-                "text": "one - two - two",
-                "pid": 13,
-                "templateId": 12
-            },
-            {
-                "id": 110,
-                "text": "one - two - three",
+                "text": "I want to have it repaired",
                 "pid": 13,
                 "templateId": 13
             },
             {
+                "id": 19,
+                "text": "I want to change a new one",
+                "pid": 13,
+                "templateId": 14
+            },
+            {
                 "id": 111,
-                "text": "one - three - one",
+                "text": "I need a tutorial guide",
                 "pid": 14,
                 "templateId": 11
             },
             {
                 "id": 112,
-                "text": "one - three - two",
+                "text": "I need a technichan to my house for help",
                 "pid": 14,
                 "templateId": 12
             },
             {
-                "id": 21,
-                "text": "two",
-                "pid": null,
+                "id": 311,
+                "text": "I bought warranty service before",
+                "pid": 31,
+                "templateId": null
+            },
+            {
+                "id": 312,
+                "text": "I didn't buy warranty service before",
+                "pid": 31,
                 "templateId": null
             }
         ]
@@ -158,25 +179,25 @@
                 "values": [
                     {
                         "key": "note_subject",
-                        "value": "{{}}"
+                        "value": "{{user}} device broken"
                     },
                     {
                         "key": "note_content",
-                        "value": "{{}}"
+                        "value": "{{user}} device broken, and want to get a techinican, and need help immedately"
                     }
                 ]
             },
             {
                 "id": 22,
-                "name": "device not stable",
+                "name": "device broken",
                 "values": [
                     {
                         "key": "note_subject",
-                        "value": "{{}}"
+                        "value": "{{user}} device broken"
                     },
                     {
                         "key": "note_content",
-                        "value": "{{}}"
+                        "value": "{{user}} device broken, and want to get a techinican, and need help in two days"
                     }
                 ]
             },
@@ -198,37 +219,31 @@
         "decisions": [
             {
                 "id": 21,
-                "text": "one",
+                "text": "Customer's device is broken, and ",
                 "pid": null,
                 "templateId": null
             },
             {
                 "id": 22,
-                "text": "one - one",
+                "text": "want a technician, and",
                 "pid": 21,
                 "templateId": null
             },
             {
                 "id": 23,
-                "text": "one - two",
-                "pid": 21,
-                "templateId": null
-            },
-            {
-                "id": 24,
-                "text": "one - three",
+                "text": "want online support, and",
                 "pid": 21,
                 "templateId": null
             },
             {
                 "id": 25,
-                "text": "one - one - one",
+                "text": "want need help immediately",
                 "pid": 22,
                 "templateId": 21
             },
             {
                 "id": 26,
-                "text": "one - one - two",
+                "text": "want need help in two days",
                 "pid": 22,
                 "templateId": 22
             },
