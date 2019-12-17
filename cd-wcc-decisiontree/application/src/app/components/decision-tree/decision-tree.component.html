@@ -1,39 +1,36 @@
-<!-- <div class="card center">
-  <div class="container">
-    <h4><b>Hi {{user}}, press any star to continue.</b></h4>
-  </div>
-  <div class=" container">
-    <ul class="list-inline rating-list" *ngFor="let star of stars">
-      <li (click)="countStar(star)" [ngClass]="{'selected': (star <= selectedValue)}">
-        <i class="fa fa-star"></i>
-      </li>
-    </ul>
-  </div>
-</div> -->
-
-
-
-<div class="fd-panel">
+<div style="height=100%">
+<div class="fd-panel wcc-decision-body">
   <div class="fd-panel__header">
     <div class="fd-panel__head">
       <h3 class="fd-panel__title">
         Operator Decision Tree
       </h3>
       <p class="fd-panel__description">
-        Start by choosing an option from the list below.
+        {{ currentDecision ? decisionDesc : "Start by choosing an option from the list below." }}
       </p>
     </div>
     <div class="fd-panel__actions">
-      <button fd-button>Skip</button>
+      <button fd-button (click)="continue()">Skip</button>
     </div>
   </div>
-  <div class="fd-panel__filters" id="">
+  <div class="fd-panel__filters" *ngIf="currentDecision">
     <div class="wcc-actions">
-      <button fd-button>Back</button>
-      <button fd-button>Start Over</button>
+      <button fd-button (click)="onGoBack()">Back</button>
+      <button fd-button (click)="onGoRoot()">Start Over</button>
     </div>
   </div>
   <div class="fd-panel__body">
-    <p>.fd-panel__body</p>
+    <div class="wcc-decision-items">
+      <ul>
+        <li *ngFor="let decision of decisions">
+          <button fd-button (click)="onMakeDecision(decision)">{{decision.text}}</button>
+        </li>
+      </ul>
+    </div>
+    <div class="wcc-template-content" *ngIf="template">
+      <div>{{template}}</div>
+      <button fd-button (click)="continue()">Confirm</button>
+    </div>
   </div>
+</div>
 </div>

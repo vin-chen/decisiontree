@@ -3,13 +3,12 @@ import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { SHELL_EVENTS, ShellSdk } from 'fsm-shell';
 import { fromEvent } from 'rxjs';
-import { mergeMap, tap, switchMap } from 'rxjs/operators';
+import { mergeMap, tap, map } from 'rxjs/operators';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { TemplateService } from '../../services/template.service';
 
 declare var parent: Window | undefined;
 declare var process: { env: { [k: string]: string } } | undefined;
-declare var YT: any;
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -18,22 +17,24 @@ declare var YT: any;
   styleUrls: ['./decision-tree.component.scss']
 })
 export class DecisionTreeComponent implements OnInit {
-  stars: number[] = [1, 2, 3, 4, 5];
-  selectedValue: number;
   private shellSdk: ShellSdk;
   private isBrowser: boolean;
   public version: string;
-  private canContinue = false;
   public user: string;
-  public show = false;
 
   private tree: any;
+  private decisions: any;
+  private template: any;
+  private categoryId: number;
+  private currentDecision: any;
+  private decisionDesc: string;
 
   constructor(
     @Inject(PLATFORM_ID) private platformId,
     private sanitizer: DomSanitizer,
     private route: ActivatedRoute) {
     this.isBrowser = isPlatformBrowser(platformId);
+    this.decisionDesc = "Customer want to ";
   }
 
   ngOnInit() {
@@ -45,11 +46,13 @@ export class DecisionTreeComponent implements OnInit {
       this.version = process.env.VERSION;
     }
     this.route.paramMap.pipe(
-      switchMap((params: ParamMap) => {
-        return TemplateService.getTree(parseInt(params.get('id')));
+      map((params: ParamMap): Array<any> => {
+        this.categoryId = parseInt(params.get('id'));
+        return TemplateService.getTree(this.categoryId);
       })
     ).subscribe((res) => {
       this.tree = res;
+      this.decisions = this.tree;
     });
   }
 
@@ -68,10 +71,7 @@ export class DecisionTreeComponent implements OnInit {
           // this will response the "result value" output context back to the flow-runtime
           tap(result => {
             this.shellSdk.emit(SHELL_EVENTS.Version1.FLOWS.ON_CONTINUE, {
-              output: [{
-                name: 'rating',
-                value: this.selectedValue
-              }]
+              output: this.template
             });
             document.write('');
           })
@@ -95,9 +95,36 @@ export class DecisionTreeComponent implements OnInit {
 
   }
 
-  countStar(star) {
-    this.selectedValue = star;
-    this.shellSdk.emit(SHELL_EVENTS.Version1.FLOWS.CAN_CONTINUE, this.selectedValue !== undefined);
+  public onMakeDecision(decision: any) {
+    this.currentDecision = decision;
+    this.decisionDesc += decision.text;
+    this.decisions = decision.children;
+    if (decision && decision.templateId) {
+      this.template = TemplateService.getTemplateData(this.categoryId, decision.templateId);
+    }
+    if (decision.hasChildren) {
+      this.decisionDesc += ", and ";
+    }
+  }
+
+  public onGoBack() {
+    if (this.currentDecision.parent) {
+      this.currentDecision = this.currentDecision.parent;
+      this.decisions = this.currentDecision.children;
+      this.template = null;
+    } else {
+      this.onGoRoot();
+    }
+  }
+
+  public onGoRoot() {
+    this.decisions = this.tree;
+    this.currentDecision = null;
+    this.template = null;
+  }
+
+  private continue() {
+    this.shellSdk.emit(SHELL_EVENTS.Version1.FLOWS.CAN_CONTINUE, true);
   }
 
 }

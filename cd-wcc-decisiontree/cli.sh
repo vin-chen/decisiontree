@@ -2,7 +2,7 @@
 set -e
 
 # name of your app 
-APP_NAME="cd-i333486-starter"
+APP_NAME="cd-wcc-decisiontree"
 
 ################ CONFIG TO DEPLOY TO KYMA ##################
 
