@@ -36,11 +36,11 @@
                     <td fd-table-cell>{{temp.decisions.length}}</td>
                     <td fd-table-cell>
                         <button fd-button [fdType]="'medium'" [options]="'light'" [glyph]="'detail-view'"
-                            (click)="rowDetail($event, i)"></button>
+                            (click)="selectTemplate(i, 'detail')"></button>
                         <button fd-button [fdType]="'medium'" [options]="'light'" [glyph]="'download'"
-                            (click)="rowDownload($event, i)"></button>
+                            (click)="selectTemplate(i, 'download')"></button>
                         <button fd-button [fdType]="'medium'" [options]="'light'" [glyph]="'delete'"
-                            (click)="rowDelete($event, i)"></button>
+                            (click)="selectTemplate(i, 'delete')"></button>
                     </td>
 
                 </tr>
@@ -233,6 +233,25 @@
         <button *ngIf="uploadFiles && uploadFiles.length > 0" class="action-button" fd-button
             (click)="modal.close('continue')" [fdType]="'main'">
             Upload
+        </button>
+    </fd-modal-footer>
+</ng-template>
+
+<ng-template let-modal #detailModal>
+    <fd-modal-header>
+        <h1 fd-modal-title></h1>
+        <button fd-modal-close-btn (click)="modal.dismiss('x')"></button>
+    </fd-modal-header>
+    <fd-modal-body style="text-align: center;">
+    
+    </fd-modal-body>
+    <fd-modal-footer>
+        <button class="action-button" fd-button (click)="downloadFile()" [options]="'light'">
+            Download
+        </button>
+        <button class="action-button" fd-button
+            (click)="modal.close('continue')" [fdType]="'main'">
+            Confirmed
         </button>
     </fd-modal-footer>
 </ng-template>

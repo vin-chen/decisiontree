@@ -46,6 +46,7 @@ export class ConfigComponent implements OnInit {
   public onEditTemplateConfig: any;
   public onEditTemplate: ITemplate;
   public onEditTemplateValues: ITemplateValue[];
+  public selectedTemplateConfig: ITemplateConfig;
 
   constructor(private modalService: ModalService) {
     this.isCreatingTree = false;
@@ -54,6 +55,7 @@ export class ConfigComponent implements OnInit {
     this.onEditTemplateConfig = this.initialTemplateConfig;
     this.onEditTemplateValues = [];
     this.noNameError = false;
+    this.selectedTemplateConfig = null;
   }
 
   ngOnInit() {
@@ -89,7 +91,8 @@ export class ConfigComponent implements OnInit {
 
   addDecision() {
     console.log(this.onEditDecision);
-    this.onEditTemplateConfig.decisions.push(this.onEditDecision);
+    const temp = this.onEditDecision;
+    this.onEditTemplateConfig.decisions.push(temp);
     this.onEditDecision = this.initialDecision;
   }
 
@@ -117,4 +120,28 @@ export class ConfigComponent implements OnInit {
       this.isCreatingTree = false;
     }
   }
+
+  selectTemplate(index, type) {
+    this.selectedTemplateConfig = this.templates[index];
+    console.log(this.selectedTemplateConfig);
+    switch(type) {
+      case 'detail': {
+        console.log(`detail`);
+        break;
+      };
+      case 'download': {
+        console.log(`download`);
+        break;
+      };
+      case 'delete': {
+        console.log(`delete`);
+        break;
+      };
+      default: {
+        console.log(type);
+        break;
+      }
+    }
+  }
+
 }
