@@ -2,7 +2,7 @@
     <div fd-form-set>
         <div fd-form-item>
             <label fd-form-label for="input-1">Note Title:</label>
-            <input fd-form-control type="text" id="input-1" value="{{note.title}}">
+            <input fd-form-control type="text" id="input-1" [value]="note.title">
         </div>
     </div>
     <div fd-form-set>
@@ -10,7 +10,7 @@
             <label fd-form-label for="textarea-1">
                 Note Content:
             </label>
-            <textarea fd-form-control placeholder="The note content" id="textarea-1" value="{{note.content}}"></textarea>
+            <textarea fd-form-control placeholder="The note content" id="textarea-1" [value]="note.content"></textarea>
         </div>
     </div>
     <button fd-button (click)="onSave()">Save</button>

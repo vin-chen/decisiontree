@@ -97,7 +97,7 @@ export class EmailComponent implements OnInit {
   private findValueByKeyFromContextArray(initCont: any[], key: string) {
     let value: any;
     initCont.forEach((e) => {
-      if (e.key === key) {
+      if (e.name === key) {
         value = e.value;
       }
     });

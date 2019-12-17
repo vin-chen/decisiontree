@@ -2,19 +2,19 @@
     <div fd-form-set>
         <div fd-form-item>
             <label fd-form-label for="input-1">From:</label>
-            <input fd-form-control type="text" id="input-1" value="{{email.fromAddress}}">
+            <input fd-form-control type="text" id="input-1" [value]="email.fromAddress">
         </div>
     </div>
     <div fd-form-set>
         <div fd-form-item>
             <label fd-form-label for="input-2">To:</label>
-            <input fd-form-control type="text" id="input-2" value="{{email.toAddress}}">
+            <input fd-form-control type="text" id="input-2" [value]="email.toAddress">
         </div>
     </div>
     <div fd-form-set>
         <div fd-form-item>
             <label fd-form-label for="input-3">Email Subject:</label>
-            <input fd-form-control type="text" id="input-3" value="{{email.subject}}">
+            <input fd-form-control type="text" id="input-3" [value]="email.subject">
         </div>
     </div>
     <div fd-form-set>
@@ -22,7 +22,7 @@
             <label fd-form-label for="textarea-1">
                 Email Content:
             </label>
-            <textarea fd-form-control id="textarea-1" value="{{email.content}}"></textarea>
+            <textarea fd-form-control id="textarea-1" [value]="email.content"></textarea>
         </div>
     </div>
     <button fd-button (click)="onSave()">Save</button>
