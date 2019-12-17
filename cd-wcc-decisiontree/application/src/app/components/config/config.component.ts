@@ -94,7 +94,6 @@ export class ConfigComponent implements OnInit {
   }
 
   addDecision() {
-    console.log(this.onEditDecision);
     const temp: IDecision = { ...this.onEditDecision };
     this.onEditTemplateConfig.decisions.push(temp);
     this.onEditDecision = this.initialDecision;
@@ -107,30 +106,30 @@ export class ConfigComponent implements OnInit {
     // console.log(this.onEditTemplate);
     const temp: ITemplate = { ...this.onEditTemplate };
     this.onEditTemplateConfig.templates.push(temp);
-    this.onEditTemplate = this.initialTemplate;
+    this.onEditTemplate = {...this.initialTemplate};
   }
 
   addTemplateValue() {
-    this.onEditTemplateValues.push(this.initialTemplateValue);
+    const temp = {...this.initialTemplateValue}
+    this.onEditTemplateValues.push(temp);
   }
 
   createTemplateConfig() {
-    console.log(this.onEditTemplateConfig);
     if (!this.onEditTemplateConfig.name) {
       this.noNameError = true;
       return;
     } else {
+      this.onEditTemplateConfig.id = this.templates.length;
       const tempCongig = { ...this.onEditTemplateConfig };
       this.templates.push(tempCongig);
       this.localStorage.templates = this.templates;
-      this.onEditTemplateConfig = this.initialTemplateConfig;
+      this.onEditTemplateConfig = {...this.initialTemplateConfig};
       this.isCreatingTree = false;
     }
   }
 
   selectTemplate(index, type) {
     this.selectedTemplateConfig = this.templates[index];
-    console.log(this.selectedTemplateConfig);
     switch (type) {
       case 'detail': {
         console.log(`detail`);
@@ -142,6 +141,7 @@ export class ConfigComponent implements OnInit {
       };
       case 'delete': {
         console.log(`delete`);
+        this.deleteConfig(index);
         break;
       };
       default: {
@@ -149,6 +149,11 @@ export class ConfigComponent implements OnInit {
         break;
       }
     }
+  }
+
+  public deleteConfig(index) {
+    this.deleteItemFormArray(this.templates, index);
+    this.localStorage.templates = this.templates;
   }
 
   public downloadFile() {
