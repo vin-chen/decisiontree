@@ -28,13 +28,14 @@ export class DecisionTreeComponent implements OnInit {
   private categoryId: number;
   private currentDecision: any;
   private decisionDesc: string;
+  private decisionDescStack: Array<string>;
 
   constructor(
     @Inject(PLATFORM_ID) private platformId,
     private sanitizer: DomSanitizer,
     private route: ActivatedRoute) {
     this.isBrowser = isPlatformBrowser(platformId);
-    this.decisionDesc = "Customer want to ";
+    this.decisionDescStack = [];
   }
 
   ngOnInit() {
@@ -97,13 +98,14 @@ export class DecisionTreeComponent implements OnInit {
 
   public onMakeDecision(decision: any) {
     this.currentDecision = decision;
-    this.decisionDesc += decision.text;
+    this.decisionDescStack.push(decision.text);
+    this.decisionDesc = this.getDescription(false);
     this.decisions = decision.children;
     if (decision && decision.templateId) {
       this.template = TemplateService.getTemplateData(this.categoryId, decision.templateId);
     }
-    if (decision.hasChildren) {
-      this.decisionDesc += ", and ";
+    if (!decision.hasChildren) {
+      this.decisionDesc = this.getDescription(true);
     }
   }
 
@@ -112,6 +114,8 @@ export class DecisionTreeComponent implements OnInit {
       this.currentDecision = this.currentDecision.parent;
       this.decisions = this.currentDecision.children;
       this.template = null;
+      this.decisionDescStack.pop();
+      this.decisionDesc = this.getDescription(false);
     } else {
       this.onGoRoot();
     }
@@ -121,6 +125,32 @@ export class DecisionTreeComponent implements OnInit {
     this.decisions = this.tree;
     this.currentDecision = null;
     this.template = null;
+    this.decisionDescStack = [];
+    this.decisionDesc = this.getDescription(false);
+  }
+
+  // private getDescription(ended: boolean) {
+  //   let str = 'Customer want to ';
+  //   const postFix = ' and ';
+  //   this.decisionDescStack.forEach(desc => {
+  //     str += desc + postFix;
+  //   });
+  //   if (ended) {
+  //     str = str.replace(new RegExp(postFix + '$'), '');
+  //   } else {
+  //     str += '...';
+  //   }
+  //   return str;
+  // }
+
+  private getDescription(ended: boolean) {
+    let str = '';
+    const space = ' ';
+    str = this.decisionDescStack.join(' ');
+    if (!ended) {
+      str += '...';
+    }
+    return str;
   }
 
   private continue() {

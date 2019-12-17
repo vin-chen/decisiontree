@@ -51,7 +51,7 @@
                 "values": [
                     {
                         "key": "servicecall_subject",
-                        "value": "{{}}",
+                        "value": "{{user}} device broker",
                         "type": "string"
                     },
                     {
@@ -61,7 +61,7 @@
                     },
                     {
                         "key": "servicecall_remarks",
-                        "value": "{{}}",
+                        "value": "user report their device is broken, with hight priority, and need us dispatch worker immediately",
                         "type": "string"
                     }
                 ]

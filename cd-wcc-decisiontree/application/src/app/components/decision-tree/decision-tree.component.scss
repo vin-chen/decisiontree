@@ -3,9 +3,63 @@
 }
 
 .wcc-actions {
-
+  button {
+    margin-right: 12px;
+    font-weight: bold;
+    color: #262625;
+  }
 }
 
-.wcc-decision-body{
+.wcc-decision-body {
   height: 100%;
+  background-color: transparent;
+}
+
+.wcc-button-red {
+  color: #f44336 !important;
+}
+
+.wcc-title {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.wcc-description {
+  font: bold 14px/28px Roboto, "Helvetica Neue", sans-serif;
+}
+
+.panel__actions {
+  button {
+    width: 70px;
+  }
+}
+
+.wcc-decision-items {
+  button {
+    border-radius: 15px;
+    transition: box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 34px;
+    text-align: left;
+    min-width: 50px;
+    box-sizing: border-box;
+    box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+    border: none;
+    color: rgba(0, 0, 0, 0.87);
+    min-width: 70px;
+    padding-right: 20px;
+    &:hover{
+      box-shadow: 0 5px 5px -3px rgba(0,0,0,.2), 0 8px 10px 1px rgba(0,0,0,.14), 0 3px 14px 2px rgba(0,0,0,.12);
+      background-color: #d81b60;
+    }
+  }
+  ul {
+    list-style: none;
+    li {
+      margin-bottom: 12px;
+    }
+  }
+}
+
+.wcc-template-content {
+  
 }
