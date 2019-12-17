@@ -1,7 +1,24 @@
+import { Injectable } from '@angular/core';
 import templates from '../data/templates.json';
+import { LocalstorageService } from '../services/localStorage.service';
 
+@Injectable()
 export class TemplateService {
+    public static templates: Array<any>;
+    public static localStorageService = new LocalstorageService();
+
+    public static getTemplates() {
+        if(!TemplateService.localStorageService.templates) {
+            TemplateService.localStorageService.templates = templates;
+        }
+        if (!TemplateService.templates) {
+            TemplateService.templates = this.localStorageService.templates;
+        }
+        return TemplateService.templates;
+    }
+    
     public static getTree(id: number): Array<any> {
+        const templates = TemplateService.getTemplates();
         const template = templates.find(data => data.id === id);
         const tree = [];
         if (template && template.decisions) {
@@ -28,6 +45,7 @@ export class TemplateService {
     }
 
     public static getTemplateData(categoryId: number, templateId: number): any {
+        const templates = TemplateService.getTemplates();
         const template = templates.find(data => data.id === categoryId);
         const templateItem = template.templates.find(data => data.id === templateId);
         return TemplateService.formatData(templateItem.values);

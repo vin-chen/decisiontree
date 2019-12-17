@@ -1,6 +1,7 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { ModalService } from 'fundamental-ngx';
 import { ITemplateConfig, ITemplate, IDecision, ITemplateValue } from '../../data/ITemplate';
+import { LocalstorageService } from '../../services/localStorage.service';
 
 import templates from '../../data/templates.json';
 
@@ -48,7 +49,7 @@ export class ConfigComponent implements OnInit {
   public onEditTemplateValues: ITemplateValue[];
   public selectedTemplateConfig: ITemplateConfig;
 
-  constructor(private modalService: ModalService) {
+  constructor(private modalService: ModalService, private localStorage: LocalstorageService) {
     this.isCreatingTree = false;
     this.onEditDecision = this.initialDecision;
     this.onEditTemplate = this.initialTemplate;
@@ -56,10 +57,13 @@ export class ConfigComponent implements OnInit {
     this.onEditTemplateValues = [];
     this.noNameError = false;
     this.selectedTemplateConfig = null;
+    if (!this.localStorage.templates) {
+      this.localStorage.templates = templates;
+    } 
   }
 
   ngOnInit() {
-    this.templates = templates;
+    this.templates = this.localStorage.templates;
   }
 
   openCreatModal(modal: TemplateRef<any>): void {
@@ -90,7 +94,6 @@ export class ConfigComponent implements OnInit {
   }
 
   addDecision() {
-    console.log(this.onEditDecision);
     const temp: IDecision = { ...this.onEditDecision };
     this.onEditTemplateConfig.decisions.push(temp);
     this.onEditDecision = this.initialDecision;
@@ -103,29 +106,30 @@ export class ConfigComponent implements OnInit {
     // console.log(this.onEditTemplate);
     const temp: ITemplate = { ...this.onEditTemplate };
     this.onEditTemplateConfig.templates.push(temp);
-    this.onEditTemplate = this.initialTemplate;
+    this.onEditTemplate = {...this.initialTemplate};
   }
 
   addTemplateValue() {
-    this.onEditTemplateValues.push(this.initialTemplateValue);
+    const temp = {...this.initialTemplateValue}
+    this.onEditTemplateValues.push(temp);
   }
 
   createTemplateConfig() {
-    console.log(this.onEditTemplateConfig);
     if (!this.onEditTemplateConfig.name) {
       this.noNameError = true;
       return;
     } else {
+      this.onEditTemplateConfig.id = this.templates.length;
       const tempCongig = { ...this.onEditTemplateConfig };
       this.templates.push(tempCongig);
-      this.onEditTemplateConfig = this.initialTemplateConfig;
+      this.localStorage.templates = this.templates;
+      this.onEditTemplateConfig = {...this.initialTemplateConfig};
       this.isCreatingTree = false;
     }
   }
 
   selectTemplate(index, type) {
     this.selectedTemplateConfig = this.templates[index];
-    console.log(this.selectedTemplateConfig);
     switch (type) {
       case 'detail': {
         console.log(`detail`);
@@ -137,6 +141,7 @@ export class ConfigComponent implements OnInit {
       };
       case 'delete': {
         console.log(`delete`);
+        this.deleteConfig(index);
         break;
       };
       default: {
@@ -146,8 +151,25 @@ export class ConfigComponent implements OnInit {
     }
   }
 
+  public deleteConfig(index) {
+    this.deleteItemFormArray(this.templates, index);
+    this.localStorage.templates = this.templates;
+  }
+
   public downloadFile() {
     console.log(this.selectedTemplateConfig);
+  }
+
+  public deleteTemplate(index) {
+    this.deleteItemFormArray(this.onEditTemplateConfig.templates, index);
+  }
+
+  public deleteDecision(index) {
+    this.deleteItemFormArray(this.onEditTemplateConfig.decisions, index);
+  }
+
+  public deleteItemFormArray(array: Array<any>, index: number) {
+   array.splice(index, 1);
   }
 
 }
