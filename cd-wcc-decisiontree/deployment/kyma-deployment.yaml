@@ -34,7 +34,7 @@ metadata:
     example: replace_me_with_app_name
     app: replace_me_with_app_name
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: replace_me_with_app_name
@@ -56,7 +56,7 @@ spec:
           limits:
             memory: 100Mi
           requests:
-            memory: 32Mi
+            memory: 20Mi
         env:
         - name: PORT
           value: "1337"
