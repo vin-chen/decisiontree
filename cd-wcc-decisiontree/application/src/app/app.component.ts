@@ -12,7 +12,7 @@ import { TemplateService } from './services/template.service.js';
 
 export class AppComponent implements OnInit {
 
-  private templates: Array<any>;
+  public templates: Array<any>;
 
   public constructor() {
 

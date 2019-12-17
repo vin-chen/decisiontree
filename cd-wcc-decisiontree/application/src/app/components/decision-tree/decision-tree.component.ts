@@ -23,8 +23,8 @@ export class DecisionTreeComponent implements OnInit {
   public user: string;
 
   private tree: any;
-  private decisions: any;
-  private template: any;
+  public decisions: any;
+  public template: any;
   private categoryId: number;
   private currentDecision: any;
   private decisionDesc: string;
@@ -153,7 +153,7 @@ export class DecisionTreeComponent implements OnInit {
     return str;
   }
 
-  private continue() {
+  public continue() {
     this.shellSdk.emit(SHELL_EVENTS.Version1.FLOWS.CAN_CONTINUE, true);
   }
 

@@ -46,6 +46,7 @@ export class ConfigComponent implements OnInit {
   public onEditTemplateConfig: any;
   public onEditTemplate: ITemplate;
   public onEditTemplateValues: ITemplateValue[];
+  public selectedTemplateConfig: ITemplateConfig;
 
   constructor(private modalService: ModalService) {
     this.isCreatingTree = false;
@@ -54,6 +55,7 @@ export class ConfigComponent implements OnInit {
     this.onEditTemplateConfig = this.initialTemplateConfig;
     this.onEditTemplateValues = [];
     this.noNameError = false;
+    this.selectedTemplateConfig = null;
   }
 
   ngOnInit() {
@@ -89,7 +91,8 @@ export class ConfigComponent implements OnInit {
 
   addDecision() {
     console.log(this.onEditDecision);
-    this.onEditTemplateConfig.decisions.push(this.onEditDecision);
+    const temp: IDecision = { ...this.onEditDecision };
+    this.onEditTemplateConfig.decisions.push(temp);
     this.onEditDecision = this.initialDecision;
   }
 
@@ -98,7 +101,8 @@ export class ConfigComponent implements OnInit {
     this.onEditTemplate.values = this.onEditTemplateValues;
     this.onEditTemplateValues = [];
     // console.log(this.onEditTemplate);
-    this.onEditTemplateConfig.templates.push(this.onEditTemplate);
+    const temp: ITemplate = { ...this.onEditTemplate };
+    this.onEditTemplateConfig.templates.push(temp);
     this.onEditTemplate = this.initialTemplate;
   }
 
@@ -108,13 +112,42 @@ export class ConfigComponent implements OnInit {
 
   createTemplateConfig() {
     console.log(this.onEditTemplateConfig);
-    if(!this.onEditTemplateConfig.name) {
+    if (!this.onEditTemplateConfig.name) {
       this.noNameError = true;
       return;
     } else {
-      this.templates.push(this.onEditTemplateConfig);
+      const tempCongig = { ...this.onEditTemplateConfig };
+      this.templates.push(tempCongig);
       this.onEditTemplateConfig = this.initialTemplateConfig;
       this.isCreatingTree = false;
     }
   }
+
+  selectTemplate(index, type) {
+    this.selectedTemplateConfig = this.templates[index];
+    console.log(this.selectedTemplateConfig);
+    switch (type) {
+      case 'detail': {
+        console.log(`detail`);
+        break;
+      };
+      case 'download': {
+        console.log(`download`);
+        break;
+      };
+      case 'delete': {
+        console.log(`delete`);
+        break;
+      };
+      default: {
+        console.log(type);
+        break;
+      }
+    }
+  }
+
+  public downloadFile() {
+    console.log(this.selectedTemplateConfig);
+  }
+
 }
