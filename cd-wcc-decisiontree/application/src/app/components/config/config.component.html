@@ -56,28 +56,43 @@
             <h2 fd-panel-title>Create Tree</h2>
         </fd-panel-head>
         <fd-panel-actions>
-            <button fd-button (click)="isCreatingTree = false" [options]="'light'" style="margin-right: 12px;">Cancle</button>
-            <button fd-button (click)="isCreatingTree = false" [options]="'emphasized'">Confirm</button>
+            <button fd-button (click)="isCreatingTree = false" [options]="'light'"
+                style="margin-right: 12px;">Cancle</button>
+            <button fd-button (click)="createTemplateConfig()" [options]="'emphasized'">Confirm</button>
         </fd-panel-actions>
     </fd-panel-header>
 
     <fd-panel-body>
         <div fd-form-set>
             <div fd-form-item style="width: 30%;">
-                <label fd-form-label for="inputName">Tree Name:</label>
-                <input fd-form-control type="text" id="inputName" placeholder="new tree name">
+                <label fd-form-label for="inputName">Tree Name *:</label>
+                <input fd-form-control type="text" id="inputName" [(ngModel)]="onEditTemplateConfig.name" placeholder="new tree name" [state]="noNameError ? 'invalid' : ''" (ngModelChange)="noNameError = false">
             </div>
         </div>
         <div fd-form-set>
             <div fd-form-item style="width: 100%;">
                 <label fd-form-label>Templetes:</label>
-                <p *ngFor="let temp of inputTemplateConfig.templates">{{temp.id}} / {{temp.name}}</p>
+                <div *ngIf="onEditTemplateConfig.templates && onEditTemplateConfig.templates.length">
+                    <p *ngFor="let temp of onEditTemplateConfig.templates">{{temp.id}} / {{temp.name}}</p>
+                </div>
+                <div *ngIf="!onEditTemplateConfig.templates || !onEditTemplateConfig.templates.length">
+                    <p > No templates added
+                    </p>
+                </div>
             </div>
         </div>
         <div fd-form-set>
             <div fd-form-item style="width: 100%;">
                 <label fd-form-label>Decisions:</label>
-                <p *ngFor="let decision of inputTemplateConfig.decisions">{{decision.id}} / {{decision.text}} / {{decision.pid ? decision.pid : 'null'}} / {{decision.templateId ? decision.templateId : 'null'}}</p>
+                <div *ngIf="onEditTemplateConfig.decisions && onEditTemplateConfig.decisions.length">
+                    <p *ngFor="let decision of onEditTemplateConfig.decisions">{{decision.id}} / {{decision.text}} /
+                        {{decision.pid ? decision.pid : 'null'}} / {{decision.templateId ? decision.templateId : 'null'}}
+                    </p>
+                </div>
+                <div *ngIf="!onEditTemplateConfig.decisions || !onEditTemplateConfig.decisions.length">
+                    <p > No decisions added
+                    </p>
+                </div>
             </div>
         </div>
     </fd-panel-body>
@@ -88,12 +103,32 @@
                 <h3 fd-panel-title>Decisions</h3>
             </fd-panel-head>
             <fd-panel-actions>
-                <button fd-button (click)="createDecision()" style="margin-right: 12px;">Create</button>
+                <button fd-button (click)="addDecision()" style="margin-right: 12px;">Add</button>
             </fd-panel-actions>
         </fd-panel-header>
 
         <fd-panel-body>
-            decision panel
+            <table fd-table>
+                <tbody>
+                    <tr>
+                        <td>
+                            <label fd-form-label for="decisionId">Decision Id</label>
+                            <input fd-form-control id="decisionId" type="text" [(ngModel)]="onEditDecision.id">
+                        <td>
+                            <label fd-form-label for="decisionText">Decision Text</label>
+                            <input fd-form-control id="decisionText" type="text" [(ngModel)]="onEditDecision.text">
+                        </td>
+                        <td>
+                            <label fd-form-label for="decisionPid">Decision Pid</label>
+                            <input fd-form-control id="decisionPid" type="text" [(ngModel)]="onEditDecision.pid">
+                        </td>
+                        <td>
+                            <label fd-form-label for="decisionTid">Decision TemplateId</label>
+                            <input fd-form-control id="decisionTid" type="text" [(ngModel)]="onEditDecision.templateId">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </fd-panel-body>
 
     </fd-panel>
@@ -104,12 +139,53 @@
                 <h3 fd-panel-title>Templetes</h3>
             </fd-panel-head>
             <fd-panel-actions>
-                <button fd-button (click)="createTemplete()()" style="margin-right: 12px;">Create</button>
+                <button fd-button (click)="addTemplete()" style="margin-right: 12px;">Add</button>
             </fd-panel-actions>
         </fd-panel-header>
 
         <fd-panel-body>
-            templates panel
+            <table fd-table>
+                <tbody>
+                    <tr>
+                        <td>
+                            <label fd-form-label for="templateId">Template Id</label>
+                            <input fd-form-control id="templateId" type="text" [(ngModel)]="onEditTemplate.id">
+                        </td>
+                        <td>
+                            <label fd-form-label for="templateName">Template Name</label>
+                            <input fd-form-control id="templateName" type="text" [(ngModel)]="onEditTemplate.name">
+                        </td>
+                        <td>
+                            &nbsp;
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label fd-form-label for="TemplateValues">Template Values</label>
+                        </td>
+                        <td>
+                            &nbsp;
+                        </td>
+                        <td>
+                            <button fd-button (click)="addTemplateValue()" style="float: right">Add</button>
+                        </td>
+                    </tr>
+                    <tr *ngFor="let single of onEditTemplateValues; let i = index">
+                        <td>
+                            <label fd-form-label for="key">Key</label>
+                            <input fd-form-control id="key" type="text" [(ngModel)]="single.key">
+                        </td>
+                        <td>
+                            <label fd-form-label for="value">Value</label>
+                            <input fd-form-control id="value" type="text" [(ngModel)]="single.value">
+                        </td>
+                        <td>
+                            <label fd-form-label for="type">Type</label>
+                            <input fd-form-control id="type" type="text" [(ngModel)]="single.type">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </fd-panel-body>
     </fd-panel>
 

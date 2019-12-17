@@ -8,7 +8,7 @@ export interface IDecision {
 export interface ITemplate {
     id: string;
     name: string;
-    value: IDecision[];
+    values: ITemplateValue[];
 }
 
 export interface ITemplateValue {

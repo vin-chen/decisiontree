@@ -12,24 +12,52 @@ import templates from '../../data/templates.json';
 })
 export class ConfigComponent implements OnInit {
   public templates: any;
-  public inputTemplateConfig: any;
   public uploadFiles: File[] = [];
   public uploadState: string = 'default';
   public isCreatingTree: boolean;
-  public inputDecisions: IDecision[];
-  public inputTemplates: ITemplateValue[];
+  public noNameError: boolean;
   private modalStyle: any = {
     backdropClickCloseable: false,
     minWidth: '30%'
   };
+  public initialTemplateConfig: any = {
+    id: null,
+    name: '',
+    templates: [],
+    decisions: []
+  }
+  public initialDecision: IDecision = {
+    id: null,
+    text: '',
+    pid: null,
+    templateId: null
+  };
+  public initialTemplate: ITemplate = {
+    id: null,
+    name: '',
+    values: []
+  }
+  public initialTemplateValue: ITemplateValue = {
+    key: '',
+    value: '',
+    type: ''
+  }
+  public onEditDecision: IDecision;
+  public onEditTemplateConfig: any;
+  public onEditTemplate: ITemplate;
+  public onEditTemplateValues: ITemplateValue[];
 
   constructor(private modalService: ModalService) {
-    this.isCreatingTree = true;
+    this.isCreatingTree = false;
+    this.onEditDecision = this.initialDecision;
+    this.onEditTemplate = this.initialTemplate;
+    this.onEditTemplateConfig = this.initialTemplateConfig;
+    this.onEditTemplateValues = [];
+    this.noNameError = false;
   }
 
   ngOnInit() {
     this.templates = templates;
-    this.inputTemplateConfig = templates[0];
   }
 
   openCreatModal(modal: TemplateRef<any>): void {
@@ -59,4 +87,34 @@ export class ConfigComponent implements OnInit {
     this.isCreatingTree = true;
   }
 
+  addDecision() {
+    console.log(this.onEditDecision);
+    this.onEditTemplateConfig.decisions.push(this.onEditDecision);
+    this.onEditDecision = this.initialDecision;
+  }
+
+  addTemplete() {
+    // console.log(this.onEditTemplateValues);
+    this.onEditTemplate.values = this.onEditTemplateValues;
+    this.onEditTemplateValues = [];
+    // console.log(this.onEditTemplate);
+    this.onEditTemplateConfig.templates.push(this.onEditTemplate);
+    this.onEditTemplate = this.initialTemplate;
+  }
+
+  addTemplateValue() {
+    this.onEditTemplateValues.push(this.initialTemplateValue);
+  }
+
+  createTemplateConfig() {
+    console.log(this.onEditTemplateConfig);
+    if(!this.onEditTemplateConfig.name) {
+      this.noNameError = true;
+      return;
+    } else {
+      this.templates.push(this.onEditTemplateConfig);
+      this.onEditTemplateConfig = this.initialTemplateConfig;
+      this.isCreatingTree = false;
+    }
+  }
 }
