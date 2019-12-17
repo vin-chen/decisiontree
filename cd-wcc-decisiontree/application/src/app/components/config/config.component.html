@@ -75,7 +75,9 @@
             <div fd-form-item style="width: 100%;">
                 <label fd-form-label>Templetes:</label>
                 <div *ngIf="onEditTemplateConfig.templates && onEditTemplateConfig.templates.length">
-                    <p *ngFor="let temp of onEditTemplateConfig.templates">{{temp.id}} / {{temp.name}}</p>
+                    <p *ngFor="let temp of onEditTemplateConfig.templates; let i = index">{{temp.id}} / {{temp.name}}
+                        <button fd-button [fdType]="'standard'" [options]="'light'" [glyph]="'decline'" (click)="deleteTemplate(i)"></button>
+                    </p>
                 </div>
                 <div *ngIf="!onEditTemplateConfig.templates || !onEditTemplateConfig.templates.length">
                     <p> No templates added
@@ -87,9 +89,10 @@
             <div fd-form-item style="width: 100%;">
                 <label fd-form-label>Decisions:</label>
                 <div *ngIf="onEditTemplateConfig.decisions && onEditTemplateConfig.decisions.length">
-                    <p *ngFor="let decision of onEditTemplateConfig.decisions">{{decision.id}} / {{decision.text}} /
+                    <p *ngFor="let decision of onEditTemplateConfig.decisions; let i = index">{{decision.id}} / {{decision.text}} /
                         {{decision.pid ? decision.pid : 'null'}} /
                         {{decision.templateId ? decision.templateId : 'null'}}
+                        <button fd-button [fdType]="'standard'" [options]="'light'" [glyph]="'decline'" (click)="deleteDecision(i)"></button>
                     </p>
                 </div>
                 <div *ngIf="!onEditTemplateConfig.decisions || !onEditTemplateConfig.decisions.length">

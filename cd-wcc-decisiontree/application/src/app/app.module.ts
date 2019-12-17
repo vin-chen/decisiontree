@@ -8,6 +8,8 @@ import { ConfigComponent } from './components/config/config.component';
 import { NoteComponent } from './note/note.component';
 import { FundamentalNgxModule } from 'fundamental-ngx';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LocalstorageService } from './services/localStorage.service';
+import { TemplateService } from './services/template.service';
 
 const routes: Routes = [
   { path: 'config', component:  ConfigComponent},
@@ -30,7 +32,10 @@ const routes: Routes = [
     FundamentalNgxModule,
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [
+    LocalstorageService,
+    TemplateService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
