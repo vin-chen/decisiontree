@@ -1,7 +1,7 @@
 import templates from '../data/templates.json';
 
 export class TemplateService {
-    public static getTree(id: number): any {
+    public static getTree(id: number): Array<any> {
         const template = templates.find(data => data.id === id);
         const tree = [];
         if (template && template.decisions) {
@@ -22,6 +22,7 @@ export class TemplateService {
             .forEach(dec => {
                 decision.children.push(dec);
                 TemplateService.getChildren(decisions, dec);
+                dec.parent = decision;
             });
         decision.hasChildren = !!decision.children.length;
     }
@@ -52,5 +53,6 @@ export class TemplateService {
                 value: value
             });
         });
+        return result;
     }
 }

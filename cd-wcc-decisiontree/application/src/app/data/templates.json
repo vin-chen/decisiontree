@@ -139,6 +139,12 @@
                 "text": "one - three - two",
                 "pid": 14,
                 "templateId": 12
+            },
+            {
+                "id": 21,
+                "text": "two",
+                "pid": null,
+                "templateId": null
             }
         ]
     },
