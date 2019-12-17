@@ -91,7 +91,7 @@ export class ConfigComponent implements OnInit {
 
   addDecision() {
     console.log(this.onEditDecision);
-    const temp: IDecision = this.onEditDecision;
+    const temp: IDecision = { ...this.onEditDecision };
     this.onEditTemplateConfig.decisions.push(temp);
     this.onEditDecision = this.initialDecision;
   }
@@ -101,7 +101,8 @@ export class ConfigComponent implements OnInit {
     this.onEditTemplate.values = this.onEditTemplateValues;
     this.onEditTemplateValues = [];
     // console.log(this.onEditTemplate);
-    this.onEditTemplateConfig.templates.push(this.onEditTemplate);
+    const temp: ITemplate = { ...this.onEditTemplate };
+    this.onEditTemplateConfig.templates.push(temp);
     this.onEditTemplate = this.initialTemplate;
   }
 
@@ -111,11 +112,12 @@ export class ConfigComponent implements OnInit {
 
   createTemplateConfig() {
     console.log(this.onEditTemplateConfig);
-    if(!this.onEditTemplateConfig.name) {
+    if (!this.onEditTemplateConfig.name) {
       this.noNameError = true;
       return;
     } else {
-      this.templates.push(this.onEditTemplateConfig);
+      const tempCongig = { ...this.onEditTemplateConfig };
+      this.templates.push(tempCongig);
       this.onEditTemplateConfig = this.initialTemplateConfig;
       this.isCreatingTree = false;
     }
@@ -124,7 +126,7 @@ export class ConfigComponent implements OnInit {
   selectTemplate(index, type) {
     this.selectedTemplateConfig = this.templates[index];
     console.log(this.selectedTemplateConfig);
-    switch(type) {
+    switch (type) {
       case 'detail': {
         console.log(`detail`);
         break;

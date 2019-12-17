@@ -15,10 +15,10 @@
         <fd-menu>
             <ul fd-menu-list>
               <li>
-                <a fd-side-nav-link [routerLink]="['/config']" (click)="linkPopover.close()">Config UI</a>
+                <a fd-side-nav-link href="/config" (click)="linkPopover.close()">Config UI</a>
               </li>
                 <li *ngFor="let template of templates">
-                  <a fd-side-nav-link [routerLink]="['/decision', template.id]" (click)="linkPopover.close()">{{template.name}} Decision UI</a>
+                  <a fd-side-nav-link href="/decision/{{template.id}}" (click)="linkPopover.close()">{{template.name}} Decision UI</a>
                 </li>
             </ul>
         </fd-menu>
