@@ -22,13 +22,13 @@ export class DecisionTreeComponent implements OnInit {
   public version: string;
   public user: string;
 
-  private tree: any;
+  public tree: any;
   public decisions: any;
   public template: any;
-  private categoryId: number;
-  private currentDecision: any;
-  private decisionDesc: string;
-  private decisionDescStack: Array<string>;
+  public categoryId: number;
+  public currentDecision: any;
+  public decisionDesc: string;
+  public decisionDescStack: Array<string>;
 
   constructor(
     @Inject(PLATFORM_ID) private platformId,
